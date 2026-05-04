@@ -1,6 +1,4 @@
-          
-
-            <!DOCTYPE html>
+              <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -67,7 +65,7 @@ textarea::placeholder{color:#6b6b8a}
       <p>Kuch bhi poochein — main yahan hoon!</p>
       <div class="chips">
         <div class="chip" onclick="qs('Ek funny joke sunao')">😂 Joke</div>
-        <div class="chip" onclick="qs('Aaj ka motivational quote do')">💪 Motivation</div>
+        <div class="chip" onclick="qs('Motivational quote do')">💪 Motivation</div>
         <div class="chip" onclick="qs('Python kaise seekhein?')">💻 Coding</div>
         <div class="chip" onclick="qs('Healthy food tips batao')">🥗 Health</div>
         <div class="chip" onclick="si('beautiful sunset over mountains')">🌅 Sunset</div>
@@ -85,9 +83,9 @@ textarea::placeholder{color:#6b6b8a}
 </div>
 <script>
 let mode='chat',hist=[];
-const GROQ_KEY="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";
-const GROQ_URL="https://api.groq.com/openai/v1/chat/completions";
-const MODEL="llama-3.3-70b-versatile";
+const KEY="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";
+const URL="https://openrouter.ai/api/v1/chat/completions";
+const MODEL="meta-llama/llama-3.3-70b-instruct:free";
 
 function setMode(m){
   mode=m;
@@ -129,9 +127,14 @@ async function chat(text){
   hist.push({role:'user',content:text});
   const ld=addMsg('ai','<div class="dots"><span></span><span></span><span></span></div>');
   try{
-    const r=await fetch(GROQ_URL,{
+    const r=await fetch(URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+KEY,
+        'HTTP-Referer':'https://astik121.github.io',
+        'X-Title':'Ask India'
+      },
       body:JSON.stringify({
         model:MODEL,
         max_tokens:1000,
